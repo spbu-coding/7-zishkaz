@@ -26,5 +26,6 @@ int main(int argc, char **argv) {
         free(ar[i]);
     }
     free(ar);
+	fclose(file);
     return 0;
 }

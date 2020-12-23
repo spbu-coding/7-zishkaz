@@ -8,7 +8,7 @@ static const char forbidden_symb[FORBIDDEN_COUNT] = ".,;:!?";
 
 int comparator(const void *arg1, const void *arg2) {
 
-    return -strcmp(*((char* const*) arg1), *((char* const*) arg2));
+    return -strcmp(*((const char **) arg1), *((const char **) arg2));
 }
 
 void polish_lines(char **ar, int lines_count) {
@@ -48,13 +48,13 @@ int read_file(FILE *file, char ***ar, int *lines_count) {
         *lines_count += 1;
     }
     if (temp == NULL) strcat(heap, "\n");
-    *ar = malloc(sizeof(char *) * *lines_count);
     temp = heap;
-    for (int i = 0; i < *lines_count; i++) {
+    *ar = malloc(sizeof(char *) * *lines_count);
+    for(int i = 0; i < *lines_count; i++) {
 
-        (*ar)[i] = malloc(MAX_INPUT_STRING_SIZE);
-        sscanf(temp, "%s\n", (*ar)[i]);
-        strcat((*ar)[i], "\n");
+        (*ar)[i] = calloc(MAX_INPUT_STRING_SIZE, sizeof(char));
+        int c = strchr(temp, '\n') - temp + 1;
+       	strncpy((*ar)[i], temp, strchr(temp, '\n') - temp + 1);
         temp = strchr(temp, '\n') + 1;
     }
     free(heap);
