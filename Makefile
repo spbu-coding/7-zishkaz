@@ -33,7 +33,7 @@ $(BUILD_DIR):
 check: $(LOGS)
 
 	@for log in $^ ; do \
-        if [ "$$(cat $${log})" != "$(TEST_OK_STAT)" ]; then \
+        if [ "$$(cat $${log})" != "$(TEST_OK)" ]; then \
             	exit 1; \
         fi; \
     done
@@ -43,10 +43,10 @@ $(TEST_DIR)/%.log: $(TEST_DIR)/%.in $(TEST_DIR)/%.out $(EXE)
 
 	@if [ "$$(./$(EXE) ./$<)" = "$$(cat $(word 2, $^))" ]; then \
 	echo "Test $< - passed"; \
-        echo "$(TEST_OK_STAT)" > $@; \
+        echo "$(TEST_OK)" > $@; \
     else \
     	echo "Test $< - fail"; \
-        echo "$(TEST_FL_STAT)" > $@; \
+        echo "$(TEST_FAIL)" > $@; \
     fi
 
     
