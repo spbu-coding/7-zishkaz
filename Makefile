@@ -51,4 +51,4 @@ $(TEST_DIR)/%.log: $(TEST_DIR)/%.in $(TEST_DIR)/%.out $(EXE)
 
     
 clean:
-	$(RM) $(OBJS) $(LOGS)
+	$(RM) $(EXE) $(OBJS) $(LOGS)
