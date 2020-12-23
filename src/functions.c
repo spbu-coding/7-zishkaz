@@ -8,7 +8,7 @@ static const char forbidden_symb[FORBIDDEN_COUNT] = ".,;:!?";
 
 int comparator(const void *arg1, const void *arg2) {
 
-    return strcmp(*((const char **) arg1), *((const char **) arg2));
+    return -strcmp(*((char* const*) arg1), *((char* const*) arg2));
 }
 
 void polish_lines(char **ar, int lines_count) {
